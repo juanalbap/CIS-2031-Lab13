@@ -20,26 +20,26 @@ void print( List* l, std::ostream &out){
 }
 
 //Returns the number of items in the list
+
 int length(List* l){
-    int length = 0;
-    while ( l != NULL ){
-        l = l->next;
-        length++;
+    
+    if(l == NULL){
+        return 0;
     }
-    return length;
+
+    return 1 + length(l->next);
 }
 
 //Get the Nth item from the list
+
 string get(List* l, int index){
-    while( l != NULL && index > 0 ){
-            index--;
-            l = l->next;
-    }
-    if ( l == NULL ){
+    if(l == NULL)
         return "";
-    } else {
+    else if(index == 0) 
         return l->value;
-    }
+    else 
+        return get(l->next, index - 1);
+    
 }
 
 //Returns true if the list contains needle
@@ -230,4 +230,11 @@ TEST_CASE("Length Tests") {
     REQUIRE( length(theList) == 2 );
     insertAt(theList, 0, "C");
     REQUIRE( length(theList) == 3 );
+}
+
+void main(){
+    List* x = NULL;
+    insertAt(x, 0, "A");
+    insertAt(x, 1, "B");
+    print( x, std::cout );
 }
