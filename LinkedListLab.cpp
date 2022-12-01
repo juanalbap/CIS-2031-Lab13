@@ -59,10 +59,9 @@ bool contains(List* l, string needle){
 
 //Add an item to the list
 void insertAt(List* &list, int pos, string value){
+    
     if(list == NULL || pos == 0){
         list = new List{value, list};
-    } else if(pos == 1){
-        list->next = new List{value, list};
     } else {
         insertAt(list->next, pos - 1, value);
     }
@@ -71,13 +70,14 @@ void insertAt(List* &list, int pos, string value){
 
 //Remove an item from the list
 void deleteAt(List* &list, int pos){
-    List* l = list;
+    
+    
     if(list == NULL){
         return;
     } else if(pos == 0){
         list = list->next;
     } else {
-        deleteAt(l->next, pos - 1);
+        deleteAt(list->next, pos - 1);
     }
 
 }
